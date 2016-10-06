@@ -8,7 +8,7 @@
 
 import Foundation
 
-print("Welcome to the SimpleCalc! Enter a command:")
+print("New calculator, who dis? Please enter a command:")
 
 var programRunning : Bool = true
 
@@ -19,8 +19,8 @@ while(programRunning) {
     
     if inputArray.count == 1{
         var firstInput = inputArray[0]
-        var operation: String = readLine()!
-        var secondInput = (readLine()!)
+        var operation: String = readLine(strippingNewline: true)!
+        var secondInput = (readLine(strippingNewline: true)!)
         if Double (firstInput) != nil && Double (secondInput) != nil {
             switch operation {
             case "+":
@@ -52,17 +52,25 @@ while(programRunning) {
                 }
                 print (total/Double (inputArray.count - 1))
             case "fact":
-                var total = 1
-                var factorial : Int = Int (inputArray[0])!
-                if factorial == 0 {
-                    print (total)
-                } else if factorial < 0 {
-                    print ("Factorial does not exist for negative numbers! (Kinda)")
-                } else {
-                    for integer in 1...factorial {
-                        total *= integer
+                if Int (inputArray[0]) != nil {
+                    if inputArray.count == 2 {
+                        var total = 1
+                        var factorial : Int = Int (inputArray[0])!
+                        if factorial == 0 {
+                            print (total)
+                        } else if factorial < 0 {
+                            print ("Factorial does not exist for negative numbers!")
+                        } else {
+                            for integer in 1...factorial {
+                                total *= integer
+                            }
+                            print (total);
+                        }
+                    } else {
+                        print("Only one number for factorials")
                     }
-                    print (total);
+                } else {
+                    print("Only integers for factorial operations!")
                 }
             default:
                 print("Invalid operation")
